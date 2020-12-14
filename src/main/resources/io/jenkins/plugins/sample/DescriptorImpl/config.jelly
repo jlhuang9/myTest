@@ -1,0 +1,13 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+
+  <f:section title="测试">
+      <f:entry title="测试" field="domain" >
+        <f:textbox value="${instance.domain}" />
+      </f:entry>
+		<f:validateButton
+			title="checkDomain" progress="checking domain "
+			method="checkDomain" with="domain" />
+  </f:section>
+  
+</j:jelly>
