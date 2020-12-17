@@ -46,6 +46,4 @@ jobs:
         scp: |
           './target/jenkins-ext.hpi' => /home/github/test/
         last_ssh: |
-          echo $LASTSSH &&
-          (mkdir test1/test || true)
-          || ls -la
+          echo $LASTSSH
