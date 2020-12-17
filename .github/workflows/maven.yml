@@ -29,14 +29,14 @@ jobs:
         WELCOME: "ssh scp ssh pipelines"
         LASTSSH: "Doing something after copying"
       with:
-#        host: ${{ secrets.ALI_CLOUD_HOST }}
-#        user: ${{ secrets.ALI_CLOUD_USERNAME }}
-#        pass: ${{ secrets.ALI_CLOUD_PASSWORD }}
-#        port: ${{ secrets.ALI_CLOUD_PORT }}
-        host: 148.70.127.52
-        user: root
-        pass: Jszc@1234
-        port: 22
+        host: ${{ secrets.ALI_CLOUD_HOST }}
+        user: ${{ secrets.ALI_CLOUD_USERNAME }}
+        pass: ${{ secrets.ALI_CLOUD_PASSWORD }}
+        port: ${{ secrets.ALI_CLOUD_PORT }}
+#        host: 148.70.127.52
+#        user: root
+#        pass: Jszc@1234
+#        port: 22
         connect_timeout: 10s
         first_ssh: |
           rm -rf /home/github/test
@@ -48,3 +48,4 @@ jobs:
         last_ssh: |
           echo $LASTSSH
           echo $ALI_CLOUD_PORT
+          echo ${{ secrets.ALI_CLOUD_HOST }}
