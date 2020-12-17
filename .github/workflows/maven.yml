@@ -37,7 +37,7 @@ jobs:
 #        user: root
 #        pass: Jszc@1234
 #        port: 22
-        connect_timeout: 10s
+        connect_timeout: 30s
         first_ssh: |
           rm -rf /home/github/test
           ls -la  \necho $WELCOME
