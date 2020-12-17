@@ -1,16 +1,16 @@
 package io.jenkins.plugins.sample;
 
 import hudson.Extension;
-import hudson.model.AbstractProject;
-import hudson.tasks.BuildStepDescriptor;
-import hudson.tasks.Publisher;
 import hudson.util.FormValidation;
+import io.jenkins.plugins.sample.util.HttpUtils;
 import jenkins.model.GlobalConfiguration;
 import net.sf.json.JSONObject;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.DataBoundSetter;
 import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
+
+import java.io.IOException;
 
 /**
  * @author huangchengqian
@@ -52,6 +52,16 @@ public final class DescriptorImpl extends
 
     public String getDomain() {
         return domain;
+    }
+
+    public FormValidation doCheckDomain(
+            @QueryParameter String domain) {
+        try {
+            HttpUtils.httpGet(domain + "/health");
+        } catch (IOException e) {
+            return FormValidation.error(e.getMessage());
+        }
+        return FormValidation.ok("domain validation successful！");
     }
 
     public static DescriptorImpl get() {
