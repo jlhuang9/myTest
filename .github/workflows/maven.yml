@@ -22,3 +22,26 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+
+    - name: ssh scp ssh pipelines
+      uses: cross-the-world/ssh-scp-ssh-pipelines@latest
+      env:
+        WELCOME: "ssh scp ssh pipelines"
+        LASTSSH: "Doing something after copying"
+      with:
+        host: ${{ secrets.ALI_CLOUD_HOST }}
+        user: ${{ secrets.ALI_CLOUD_USERNAME }}
+        pass: ${{ secrets.ALI_CLOUD_PASSWORD }}
+        port: ${{ secrets.ALI_CLOUD_PORT }}
+        connect_timeout: 10s
+        first_ssh: |
+          rm -rf /home/github/test
+          ls -la  \necho $WELCOME
+          mkdir -p /home/github/test/test1 &&
+          mkdir -p /home/github/test/test2 &&
+        scp: |
+          './target/jenkins-ext.hpi' => /home/github/test/
+        last_ssh: |
+          echo $LASTSSH &&
+          (mkdir test1/test || true)
+          || ls -la
